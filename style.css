@@ -337,9 +337,12 @@ body::before{
 
 /* --- ⑨ 各社の住所＝事実情報（薄グレー小・bold無し）。各社プロフィールの直下に置き、1社で完結 -- */
 .profile__addr{ font-size:clamp(.74rem, .72rem + .1vw, .8rem); color:var(--ink-faint); line-height:1.6; margin:.6em 0 0; }   /* 肩書きより一段小さく・薄グレー。〒の直前を少し空けて住所と分かる */
-.profile__web{ margin:.5em 0 0; font-family:var(--font-en); font-size:clamp(.74rem, .72rem + .1vw, .8rem); letter-spacing:.01em; }   /* retro Webサイト併記 */
-.profile__web a{ color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px; }
-.profile__web a:hover{ color:var(--ink); }
+.profile__links{ display:flex; align-items:center; gap:.75em; margin:.55em 0 0; }   /* 住所下のリンク行：Webサイト／Instagram */
+.profile__web{ font-family:var(--font-en); font-size:clamp(.74rem, .72rem + .1vw, .8rem); letter-spacing:.01em; color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px; }   /* retro Webサイト併記 */
+.profile__web:hover{ color:var(--ink); }
+.profile__ig{ display:inline-flex; color:var(--ink-soft); }   /* Instagramアイコン＝モノクロ（地色のネイビーに合わせる・カラーロゴにしない） */
+.profile__ig:hover{ color:var(--ink); }
+.profile__ig svg{ display:block; width:1.25rem; height:1.25rem; }
 
 /* 書体は游ゴシックで確定（--font-jp が游ゴシック先頭。レビュー用スイッチャーは公開のため削除済み） */
 
@@ -347,10 +350,12 @@ body::before{
 @media (max-width: 560px){
   .profile__logo{ margin-bottom:.4em; }
   .profile__logo--r{ font-size:1.34rem; }                         /* 仮R＝mssbロックアップと同程度に小さく＝行を詰める */
-  .profile__main{ font-size:.79rem; line-height:1.38; }
+  .profile__main{ font-size:.79rem; line-height:1.36; }
   .profile__main + .profile__main{ margin-top:.06em; }
-  .profile__sub{ font-size:.71rem; line-height:1.38; }
-  .profile__main + .profile__sub{ margin-top:.36em; }
-  .profile__addr{ font-size:.69rem; line-height:1.45; margin-top:.42em; }
-  .profile__web{ font-size:.69rem; margin-top:.34em; }
+  .profile__sub{ font-size:.71rem; line-height:1.34; }
+  .profile__main + .profile__sub{ margin-top:.34em; }
+  .profile__addr{ font-size:.69rem; line-height:1.4; margin-top:.36em; }
+  .profile__links{ margin-top:.28em; gap:.5em; }
+  .profile__web{ font-size:.69rem; }
+  .profile__ig svg{ width:.95rem; height:.95rem; }
 }
