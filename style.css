@@ -233,6 +233,7 @@ body::before{
 .biz__verb{ margin:.55em 0 .5em; }             /* 確定の動詞タグライン（詳しい本文は別途プレースホルダー） */
 .biz__areas{ margin:0 0 .4em; font-size:.88rem; color:var(--ink-soft); line-height:1.85; }  /* 受託の5領域（一行・箇条書きにしない） */
 .biz__body{ margin:.3em 0 0; line-height:1.9; }  /* 各事業の本文（確定・本人語化済み・中・ネイビー） */
+.biz__launch{ margin:.3em 0 0; font-family:var(--font-en); font-size:.82rem; letter-spacing:.1em; color:var(--ink-faint); }  /* Originalの時期表記 LAUNCH 2026 WINTER：薄グレー#9AA0AC・英字・大文字 */
 
 /* --- ⑦ WORKS（実績の記録・頭文字インデックス：先頭文字でグループ化。同頭文字は束ねる） -- */
 .works{ list-style:none; margin:0; padding:0; }
