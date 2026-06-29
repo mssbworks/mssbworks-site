@@ -1,0 +1,333 @@
+/* ===========================================================
+   mssbworks コーポレートサイト  style.css
+   ステップ1：設計トークン + 骨格(①〜⑧) + ①第一声 / ②Philosophy
+   設計書 mssbworks_site_design_202606.md を唯一の正とする。
+   方針：引き算は徹底するが冷たくしない。余白が主・線は従。
+        色数を増やさない（色は後から入る料理写真に持たせる）。
+   =========================================================== */
+
+/* --- 設計トークン --------------------------------------- */
+:root{
+  /* 色：philosophy PDF の原典から実測（推測しない・PDF背景に準拠） */
+  --bg:        #f4f0ea;             /* 下地：生成り／象牙（純白・無彩色にしない） */
+  --ink:       #233148;             /* 文字：ミッドナイトブルー（黒・グレーにしない） */
+  --ink-soft:  rgba(35,49,72,.62);  /* 補助テキスト（英字ラベル等） */
+  --ink-faint: rgba(35,49,72,.42);  /* プレースホルダー（人が後から入れる本文） */
+  --hair:      rgba(35,49,72,.15);  /* ヘアライン：細く・薄く・短く */
+
+  /* マテリアル（本っぽい紙）：気づくか気づかないかのレベル。濃さはこの1変数で調整 */
+  --paper-strength: .015;           /* 紙の地のごく僅かな質感（上限の目安 .04／今は薄めスタート） */
+  --track-body: .02em;              /* 本の組版に寄せるごく僅かな字間 */
+
+  /* 書体：OSネイティブ優先（游ゴシック→ヒラギノ系）。
+     明朝は使わない／幾何学的すぎる無機質ゴシックも避ける。 */
+  --font-jp: "YuGothic","Yu Gothic","Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
+  --font-en: "Helvetica Neue","Arial",var(--font-jp);   /* 控えめな英字ラベル用 */
+
+  /* 文字サイズ階層：大きな落差は「第一声」だけに集中させる。
+     それ以降の見出しはサイズで強く張らない（張ると主張になる）。 */
+  --fs-hero:  clamp(1.3rem, 1.12rem + .9vw, 1.62rem); /* ① 第一声：中くらい（本文より一回り大きい程度・張らない） */
+  --fs-lead:  clamp(1.05rem, 1rem + .5vw, 1.22rem); /* 「誠実なものが…」＝静かな添え */
+  --fs-body:  clamp(1rem, .96rem + .32vw, 1.12rem);
+  --fs-en:    clamp(1.25rem, 1.1rem + .8vw, 1.55rem); /* FUNCTIONAL HONESTY ＝アンカー（強さは字間・太さで。サイズは張らない） */
+  --fs-label: .8rem;                            /* セクションラベル（PHILOSOPHY 等） */
+  --fs-small: .82rem;                           /* フッターの事実情報 */
+
+  /* 行送り：和文は広めに（呼吸＝間） */
+  --lh-hero: 1.75;
+  --lh-lead: 1.75;
+  --lh-body: 2.05;
+
+  /* 余白スケール：日常的な強弱は「色」でなく「余白」で作る */
+  --s1:.5rem;  --s2:1rem;  --s3:1.6rem; --s4:2.6rem;
+  --s5:4rem;   --s6:6.5rem; --s7:11.5rem; --s8:15rem;
+
+  /* レイアウト：スマホ起点。PCは余白と配置を足す */
+  --pad-x: clamp(1.5rem, 7vw, 6rem);  /* 左右余白（PCで増える） */
+  --measure: 40rem;                   /* 本文の最大行長 */
+  --measure-wide: 52rem;              /* 第一声など広め */
+}
+
+/* --- リセット（最小限） ---------------------------------- */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-jp);
+  font-weight:500;
+  font-size:var(--fs-body);
+  line-height:var(--lh-body);
+  letter-spacing:var(--track-body);     /* 本に寄せる：ごく僅かな字間 */
+  -webkit-font-smoothing:antialiased;   /* テカらせない：インクが紙に乗った感じ */
+  text-rendering:optimizeLegibility;
+}
+p{ margin:0; }
+
+/* マテリアル：本っぽい紙のごく僅かな質感（極薄ノイズ）。
+   テクスチャ画像のベタ貼りはしない＝CSS生成の微細グレインのみ。気づかせたら濃すぎ。 */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:-1;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='160'%20height='160'%20filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px 160px;
+  opacity:var(--paper-strength);
+}
+
+/* --- ロゴ（左上に常駐・ナビなし・エンボスなし） --------- */
+.logo{
+  display:block;               /* 固定しない：流れの中に置く＝下スクロールで自然に消える */
+  padding:clamp(1.2rem, 2.5vw, 2rem) var(--pad-x) 0;
+  font-family:var(--font-en);
+  font-size:1rem;
+  font-weight:500;
+  letter-spacing:.01em;
+  color:var(--ink);            /* ネイビーでただ置く（影・エンボスなし・太字にしない） */
+}
+
+/* 左寄せの本文カラム（全部中央揃えにしない＝ノペっとさせない）。
+   カラムはページ左に寄り、PCでは右側に余白が育つ。 */
+.wrap{
+  padding-inline:var(--pad-x);
+  max-width:calc(var(--measure) + var(--pad-x) * 2);
+}
+.wrap--wide{ max-width:calc(var(--measure-wide) + var(--pad-x) * 2); }
+
+/* --- ① 第一声（サイトの顔） ----------------------------- */
+.voice{
+  /* 画面いっぱいにしない。上にたっぷり余白を取り、素っ気なく置く（声を張らず、省略もしない）
+     ※ロゴが流れの中で上を取るぶん padding-top は控えめに（合計の上余白は従来と同等） */
+  padding-top:clamp(3.5rem, 14vh, 8rem);
+  padding-bottom:var(--s6);
+}
+.voice__line{
+  font-size:var(--fs-hero);
+  line-height:var(--lh-hero);
+  font-weight:500;            /* 中くらいの存在感。張らない */
+  text-wrap:balance;          /* 行のバランスのみ（装飾ではない） */
+  margin:0;
+}
+
+/* --- セクション共通 ------------------------------------- */
+.section{ padding-block:var(--s7); }   /* セクション間はたっぷり空ける */
+
+.label{                                /* PHILOSOPHY 等の小さな見出し（張らない） */
+  font-family:var(--font-en);
+  font-size:var(--fs-label);
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  margin:0 0 var(--s4);
+}
+
+/* --- ② Philosophy（思想の全文・囲わない／額装しない） ---- */
+.philo__title{                         /* FUNCTIONAL HONESTY ＝主役タイトル（大・ネイビー・太字にしない） */
+  font-family:var(--font-en);
+  font-size:var(--fs-hero);
+  font-weight:500;
+  letter-spacing:.1em;
+  line-height:1.35;
+  margin:0 0 var(--s1);                /* 直下の和訳サブと密に組む */
+}
+.philo__lead{                          /* 機能への誠実さ ＝ 訳・サブ（中・ネイビー・小さく添える） */
+  font-size:var(--fs-body);
+  line-height:var(--lh-lead);
+  font-weight:500;
+  margin:0 0 var(--s5);
+}
+.philo__body{ line-height:1.9; }        /* 本の散文：ゆったりだが屹立させない */
+.philo__body p{ margin:0 0 var(--s4); } /* 段落間だけ空ける（句点ごとの改行はやめた） */
+.philo__body p:last-child{ margin-bottom:0; }
+
+/* --- 写真（Philosophyのあと／Visionの直前に一枚だけ・枠のみ） -------- */
+.figure{ padding-block:var(--s6); }
+.figure__img{
+  display:block;
+  width:100%;
+  max-width:34rem;        /* PCで大きくしすぎない（呼吸のサイズ・張らない）・左揃え */
+  height:auto;
+  /* 角丸・影・枠線なし：地のオフホワイトに写真がそのまま乗る */
+}
+
+/* --- ③ Vision（旗：左揃え・サイズで張らない・余白で立てる） -- */
+.vision__ja{
+  font-size:var(--fs-hero);
+  line-height:var(--lh-hero);
+  font-weight:500;
+  margin:0 0 var(--s2);
+}
+.vision__en{                            /* 英語サブ（中・ネイビー・太字にしない） */
+  font-family:var(--font-en);
+  font-size:var(--fs-body);
+  font-weight:500;
+  letter-spacing:.14em;
+  margin:0;
+}
+
+/* --- ④ Values 01〜05（飾らない・流れの中で機能・項目間にヘアライン） -- */
+.values{ list-style:none; margin:var(--s4) 0 0; padding:0; }
+.value{
+  border-top:1px solid var(--hair);   /* 区切りは細く・薄く（額装しない） */
+  padding:var(--s4) 0;
+}
+.value__head{ display:flex; align-items:baseline; gap:.9em; }
+.value__no{
+  flex:none;
+  font-family:var(--font-en); font-size:.8rem; letter-spacing:.1em;
+  color:var(--ink-soft);
+}
+.value__en{                             /* Valuesの主役：例外的に少し大きく（boldにせず・サイズで） */
+  font-family:var(--font-en);
+  font-size:clamp(1.1rem, 1rem + .5vw, 1.3rem);
+  font-weight:500; letter-spacing:.04em;
+}
+.value__ja{
+  margin:.55em 0 0;
+  font-size:clamp(.85rem, .82rem + .14vw, .92rem);   /* 英字メインより一段小さく＝主従をはっきり */
+  color:var(--ink-soft);              /* 和訳は静かに */
+}
+
+/* 段落（ブロック）型のプレースホルダー */
+.ph--block{ display:block; margin:.5em 0; line-height:1.7; }
+
+/* --- 章（BUSINESS / WORKS）：思想セクションより一段上の見出し＝別の章だと分かる -- */
+.chapter{ padding-block:var(--s7); }
+.chapter--break{ padding-top:clamp(15rem, 12rem + 8vw, 21rem); }  /* WORKSの章の切り替わり：通常のセクション間より明確に広く */
+.chapter__title{                        /* BUSINESS / WORKS ＝ラベル階層（小・薄グレー・字間広め・レギュラー） */
+  font-family:var(--font-en);
+  font-size:var(--fs-label);
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  font-weight:500;
+  margin:0 0 var(--s4);
+}
+
+/* --- ⑤ BUSINESS（Mission導入＋束ね＋3事業・横並びにしない・濃淡） -- */
+.mission{                                      /* Mission メイン「種をまき…」＝日本語メイン（大） */
+  font-size:var(--fs-hero);
+  line-height:var(--lh-hero);
+  font-weight:500;
+  margin:0 0 var(--s1);
+}
+.mission__en{                                  /* 英語サブ「WE PREPARE THE GROUND.」＝中・ネイビー・太字にしない（Visionと同扱い） */
+  font-family:var(--font-en);
+  font-size:var(--fs-body);
+  font-weight:500;
+  letter-spacing:.14em;
+  margin:0 0 var(--s4);
+}
+.mission-sub{                                  /* 「ムササビがいなくても…」三行＝サブ（中・ネイビー） */
+  line-height:1.95;
+  margin:0;
+}
+.biz{ margin-top:0; }
+.biz__item{ border-top:1px solid var(--hair); padding:var(--s4) 0; }
+.biz__item--quiet{ color:var(--ink-soft); }   /* Tools は寡黙に（濃淡） */
+.biz__head{ display:flex; align-items:baseline; gap:.5em; margin:0; }
+.biz__en{ font-family:var(--font-en); font-size:var(--fs-hero); font-weight:500; letter-spacing:.04em; color:var(--ink); }  /* 英字＝主役（ネイビー・大・太字にしない） */
+.biz__ja{ font-size:.85rem; color:var(--ink-faint); }   /* 日本語＝識別用（薄く・小さく） */
+.biz__state{ margin-left:auto; font-size:.78rem; color:var(--ink-soft); }   /* 準備中／構想を静かに */
+.biz__verb{ margin:.55em 0 .5em; }             /* 確定の動詞タグライン（詳しい本文は別途プレースホルダー） */
+.biz__areas{ margin:0 0 .4em; font-size:.88rem; color:var(--ink-soft); line-height:1.85; }  /* 受託の5領域（一行・箇条書きにしない） */
+.biz__body{ margin:.3em 0 0; line-height:1.9; }  /* 各事業の本文（確定・本人語化済み・中・ネイビー） */
+
+/* --- ⑦ WORKS（実績の記録・頭文字インデックス：先頭文字でグループ化。同頭文字は束ねる） -- */
+.works{ list-style:none; margin:0; padding:0; }
+.work-group{ border-top:1px solid var(--hair); padding:var(--s4) 0; }   /* 区切り線＋広めの余白はグループ間に */
+.work{ display:flex; align-items:baseline; gap:.8em; padding-left:var(--s3); }   /* 索引（頭文字＋本文）を一段右へ＝グループ見出しを左に残し階層を分ける */
+.work + .work{ margin-top:.9em; }               /* 同一グループ内の2件目以降は線なしで詰める（束ねが見える） */
+.work__no{ flex:none; min-width:1.1em; font-family:var(--font-en); font-size:.78rem; letter-spacing:.1em; color:var(--ink-faint); }  /* 頭文字：薄く・小さく・控えめ（索引の記号）。「ま」も同じ見た目 */
+.work__body{ flex:1; min-width:0; }
+.work-head{ font-family:var(--font-en); font-size:var(--fs-hero); font-weight:500; letter-spacing:.04em; color:var(--ink); margin:0 0 .7em; }  /* 事業見出し Consulting／Own Brand：BUSINESSの事業名と同体裁（大・ネイビー・英字）・2つ完全対称 */
+.work__name{ font-size:clamp(.92rem, .88rem + .2vw, 1.02rem); line-height:1.4; margin:0; }   /* PJ名：さらに一段小さく（短名はスマホ1行に）・ネイビー */
+.work__tags{ font-size:clamp(.8rem, .77rem + .14vw, .88rem); color:var(--ink-soft); line-height:1.8; margin:.28em 0 0; }  /* 業務内容：サイズだけ下げ、色（薄グレー）は据え置き・更に薄くしない */
+
+/* --- ⑦ 二つの窓（唯一、薄い囲みOK＝アクションの場所の合図） -- */
+.windows{
+  display:grid;
+  grid-template-columns:1fr;            /* 縦に2つ（同じ幅・同じ体裁で積む） */
+  gap:var(--s3);
+  margin-top:var(--s4);
+}
+.window{                                /* 押せる窓＝button。既定の体裁をリセットしつつ薄い囲みは維持 */
+  display:block;
+  width:100%;
+  text-align:left;
+  background:transparent;
+  border:1px solid rgba(35,49,72,.22);  /* 薄い囲み（地に、ここだけ枠＝種類が変わる合図） */
+  padding:var(--s4);
+  font:inherit;
+  color:inherit;
+  cursor:pointer;
+}
+.window:hover{ border-color:rgba(35,49,72,.4); }
+.window:focus-visible{ outline:2px solid var(--ink-soft); outline-offset:2px; }
+.contact__intro{ font-family:var(--font-en); font-size:var(--fs-lead); letter-spacing:.1em; color:var(--ink); margin:0 0 var(--s4); }   /* 前置き IF THIS RESONATES,：英字・ネイビー・囲みの外/上・bold無し */
+.window__en{ display:block; font-family:var(--font-en); font-size:var(--fs-en); letter-spacing:.12em; line-height:1.35; color:var(--ink); margin:0; }   /* CONTACTゾーンのみ英字メイン：ネイビー・大きめ */
+.window__ja{ display:block; font-size:var(--fs-body); color:var(--ink-faint); line-height:1.6; margin:.55em 0 0; }   /* 日本語サブ：薄グレー#9AA0AC・一段小さく（英字の下） */
+
+/* --- ⑦ 二つの窓のフォーム（アコーディオン／装飾は最小・角丸/影なし・bold無し） -- */
+.contact-panel{ padding:var(--s2) var(--s4) var(--s3); }     /* 押した窓の直下に開く・窓の内側に揃える */
+.contact-form{ margin:0; }
+.field{ margin:0 0 var(--s3); }
+.field label{ display:block; font-size:var(--fs-small); color:var(--ink-soft); margin:0 0 .4em; }   /* ラベル：小・薄め。任意項目は文言に「（任意）」 */
+.field input,
+.field textarea{
+  width:100%;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid rgba(35,49,72,.28);  /* 細い下線のみ（薄い） */
+  color:var(--ink);                            /* 入力文字＝ネイビー */
+  font:inherit;
+  font-size:var(--fs-body);
+  padding:.45em 0;
+}
+.field textarea{ resize:vertical; }
+.field input:focus,
+.field textarea:focus{ outline:none; border-bottom-color:var(--ink); }
+.contact-submit{                       /* 控えめな送信：ベタ塗りにしない・細い枠＋ネイビー文字 */
+  margin-top:var(--s2);
+  background:transparent;
+  border:1px solid rgba(35,49,72,.4);
+  color:var(--ink);
+  font:inherit;
+  font-size:var(--fs-small);
+  letter-spacing:.08em;
+  padding:.7em 2.2em;
+  cursor:pointer;
+}
+.contact-submit:hover{ border-color:var(--ink); }
+.contact-done,
+.contact-error{ font-size:var(--fs-body); color:var(--ink); margin:0; }
+.hp{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }   /* ハニーポット（人には見せない） */
+
+/* --- プレースホルダー（{{ }}＝人が後から入れる本文） ----- */
+.ph{
+  color:var(--ink-faint);
+  border-bottom:1px dotted var(--ink-faint);
+  padding-bottom:.08em;
+}
+
+/* ステップ1のダミーセクション（仮の高さでリズムだけ確保） */
+.ph-block{ padding-block:var(--s7); min-height:56svh; }
+.ph-block .ph{ display:inline-block; font-size:var(--fs-body); }
+
+/* --- ⑨ 会社情報（二社のプロフィール：見出しなし・写真左/テキスト右・縦積み。並ぶ構図でアライアンスを示す） -- */
+.company{ padding-block:var(--s7); }
+.profile{ display:flex; align-items:center; gap:clamp(1.1rem, 4vw, 2.2rem); }
+.profile + .profile{ margin-top:var(--s5); }      /* 二社の間＝主従の唯一の差。各ブロック内の余白よりはっきり広く（線・ラベルは使わない・写真は同サイズ） */
+.profile__photo{ flex:none; width:clamp(8rem, 32vw, 14rem); }    /* 二社とも同一幅に固定（4:5なので高さも揃う・潰さない）。芋（max34rem）より小さく */
+.profile__photo img{ display:block; width:100%; height:auto; }       /* 4:5・角丸/枠線/影なし（地に直に乗る） */
+.profile__text{ flex:1; min-width:0; }
+.profile__main{ font-size:clamp(.95rem, .9rem + .22vw, 1.06rem); color:var(--ink); line-height:1.5; margin:0; }  /* 社名・代表氏名＝ネイビー */
+.profile__main + .profile__main{ margin-top:.12em; }
+.profile__sub{ font-family:var(--font-en); font-size:clamp(.82rem, .79rem + .14vw, .9rem); color:var(--ink-faint); line-height:1.5; margin:0; letter-spacing:.01em; }  /* 屋号ローマ字・英字肩書き＝薄グレー・一段小さく */
+.profile__main + .profile__sub{ margin-top:.5em; }   /* 社名群と屋号群の間を少し空ける（bold無し・強弱は色とサイズで） */
+
+/* --- ⑨ 各社の住所＝事実情報（薄グレー小・bold無し）。各社プロフィールの直下に置き、1社で完結 -- */
+.profile__addr{ font-size:clamp(.8rem, .77rem + .13vw, .88rem); color:var(--ink-faint); line-height:1.6; margin:.6em 0 0; }   /* 肩書きより一段小さく・薄グレー。〒の直前を少し空けて住所と分かる */
+
+/* 書体は游ゴシックで確定（--font-jp が游ゴシック先頭。レビュー用スイッチャーは公開のため削除済み） */

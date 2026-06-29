@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mssbworks</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ロゴ：左上に常駐（M / mssbworks）。ナビなし・エンボスなし・ネイビーでただ置く -->
+  <span class="logo">mssbworks</span>
+
+  <main>
+
+    <!-- ① 第一声 ＝ サイトの顔（設計書原文・文末そのまま） -->
+    <section class="voice" aria-label="第一声">
+      <div class="wrap wrap--wide">
+        <p class="voice__line">ふつうを研ぎ澄ますことが、一番のスペシャリティだと思います。</p>
+      </div>
+    </section>
+
+    <!-- ② Philosophy ＝ 思想の全文（philosophy PDF 原文をそのまま／囲わない） -->
+    <section class="section" aria-label="Philosophy">
+      <div class="wrap">
+        <p class="label">Philosophy</p>
+        <p class="philo__title">FUNCTIONAL HONESTY</p>
+        <p class="philo__lead">機能への誠実さ</p>
+        <div class="philo__body">
+          <!-- ブロック1：思考（確定稿）。改行は指定どおり（<br>のみ・行間に余白は足さない＝屹立させない） -->
+          <p>時代をこえて長く続いてきたもの。<br>定番として使われ続けてきたもの。<br>その普遍性には、流行や商業主義に迎合しない凛とした強さ、デザインよりも機能的な美しさがある。<br>機能、すなわち使われるということが思想の根幹にあるからだと思う。<br>機能には嘘がない。機能とは現実に応えること。現実に応えるとは、誠実であるということ。<br>誠実なものが、使われ続ける。</p>
+          <!-- ブロック2：意志（wantの表明だけで独立） -->
+          <p>ふつうを研ぎ澄ますことが、一番のスペシャリティだと思います。<br>そういう飲食をつくりたいし、そういう会社でありたい。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 写真（Philosophyのあと／Visionの直前に一枚だけ・確定）
+         特注フライヤーの試運転で揚げた芋（金縁の皿）。商品でも作品でもない＝言葉なしで受ける一枚。
+         キャプション・説明は一切付けない／1枚固定（切替・スライドショーなし）／角丸・影・枠線なし・左揃え。 -->
+    <section class="figure" aria-label="写真">
+      <div class="wrap">
+        <img class="figure__img" src="img/philosophy.jpg" alt="" width="1568" height="1046" loading="lazy" decoding="async">
+      </div>
+    </section>
+
+    <!-- ===== 以下 ③〜⑧ はステップ1ではダミー（骨格と仮の高さのみ） ===== -->
+
+    <!-- ③ Vision ＝ 旗（設計書原文。左揃え・サイズで張らない・余白で立てる） -->
+    <section class="section" aria-label="Vision">
+      <div class="wrap">
+        <p class="label">Vision</p>
+        <p class="vision__ja">長く使われ続ける飲食をつくる。</p>
+        <p class="vision__en">LONG LIFE FOOD, MADE TO BE USED.</p>
+      </div>
+    </section>
+
+    <!-- ④ Mission ＝ 独立セクション（Visionと同じ構成：ラベル＋メイン大＋サブ。階層 Vision→Mission→Values→BUSINESS） -->
+    <section class="section" aria-label="Mission">
+      <div class="wrap">
+        <p class="label">Mission</p>
+        <p class="mission">種をまき、土をつくり、耕す。</p>
+        <p class="mission__en">WE PREPARE THE GROUND.</p>
+        <p class="mission-sub">つくった人がいなくなっても、<br>育っていくように。</p>
+      </div>
+    </section>
+
+    <!-- ⑤ Values 01〜05（設計書原文。飾らず流れの中で・項目間にヘアライン） -->
+    <section class="section" aria-label="Values">
+      <div class="wrap">
+        <p class="label">Values</p>
+        <ol class="values">
+          <li class="value">
+            <div class="value__head"><span class="value__no">01</span><span class="value__en">NOT BEAUTIFUL, BUT HONEST.</span></div>
+            <p class="value__ja">美しさより、正直さを。</p>
+          </li>
+          <li class="value">
+            <div class="value__head"><span class="value__no">02</span><span class="value__en">NOT ART, BUT TOOLS.</span></div>
+            <p class="value__ja">作品じゃなく、道具として。</p>
+          </li>
+          <li class="value">
+            <div class="value__head"><span class="value__no">03</span><span class="value__en">NOT FASHION, BUT FUNCTION.</span></div>
+            <p class="value__ja">流行より、機能を。</p>
+          </li>
+          <li class="value">
+            <div class="value__head"><span class="value__no">04</span><span class="value__en">STAY IN THE FIELD.</span></div>
+            <p class="value__ja">現場に浸かって、聞き続ける。</p>
+          </li>
+          <li class="value">
+            <div class="value__head"><span class="value__no">05</span><span class="value__en">UPDATE THE STANDARD.</span></div>
+            <p class="value__ja">ふつうを、更新し続ける。</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ⑤ BUSINESS ＝ 3つの設計図（これから何をやるか）。⑥WORKSとは別の章。
+         ラベルは英語（Consulting/Own Brand/Tools）。日本語の「受託」は表に出さない。本文は動詞。濃淡をつける（横並びの対等カードにしない）。 -->
+    <section class="chapter" aria-label="BUSINESS">
+      <div class="wrap">
+        <p class="chapter__title">BUSINESS</p>
+        <!-- 導入文（束ね）は置かない【実機で削除】。ラベル直後に潔く Consulting から始める
+             （「長く使われ続ける…」はVisionで既出／「3つのやり方」は下に並ぶので予告不要） -->
+
+        <div class="biz">
+          <!-- Consulting＝厚め（動詞＋5領域＋2文。確定・本人語化済み） -->
+          <div class="biz__item">
+            <p class="biz__head"><span class="biz__en">Consulting</span><span class="biz__ja">／ 受託</span></p>
+            <p class="biz__verb">クライアントの店と経営の素地を耕す。</p>
+            <!-- 受託の5領域（確定・一行で添える。箇条書きにしない／Mission直下でなくConsultingの中） -->
+            <p class="biz__areas">商品開発／オペレーション設計／購買・食材開拓／HR Design／現場と経営の接続</p>
+            <p class="biz__body">店ごとに必要な深さで入り、自走できる状態をつくる。成果物は、繁盛店やマニュアルではなく、自分たちで続けていけること。</p>
+          </div>
+          <!-- Own Brand＝中くらい（準備中。確定・本人語化済み） -->
+          <div class="biz__item">
+            <p class="biz__head"><span class="biz__en">Own Brand</span><span class="biz__ja">／ 自社</span><span class="biz__state">準備中</span></p>
+            <p class="biz__verb">ロングライフブランドの企画と実装。</p>
+            <p class="biz__body">POPUPから始め、パートナーと続けていく。</p>
+          </div>
+          <!-- Tools＝寡黙に一行（構想。確定） -->
+          <div class="biz__item biz__item--quiet">
+            <p class="biz__head"><span class="biz__en">Tools</span><span class="biz__ja">／ 道具</span><span class="biz__state">構想</span></p>
+            <p class="biz__verb">料理人に依存しない再現性をつくる道具・装置の企画とディレクション</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑥ WORKS ＝ 実績の記録（これまで何をやってきたか）。⑤BUSINESSとは別の章（chapter--break＝たっぷり余白で章を分ける）。
+         日本語の「受託」とは書かない。淡々と仕事の記録として。フリッツ/ORIOLE厚め・他は軽く。実名掲載は要事前確認。末尾にOwn Brandのcoming枠。 -->
+    <section class="chapter chapter--break" aria-label="WORKS">
+      <div class="wrap">
+        <p class="chapter__title">WORKS</p>
+        <!-- 導入なし。ラベル直後からいきなり1件目。フラット・アルファベット順・PJ名＋業務内容のみ・分類なし・年/数字なし
+             用語はBUSINESSの5領域に統一（商品開発／オペレーション設計／購買・食材開拓／HR Design／現場と経営の接続） -->
+        <ol class="works">
+          <!-- ▼ Consulting（受託の実績・頭文字インデックス B〜ま・束ねD/O/ま） -->
+          <li class="work-group">
+            <p class="work-head">Consulting</p>
+            <div class="work"><span class="work__no">B</span><div class="work__body"><p class="work__name">BONBON WINESTAND（名古屋）</p><p class="work__tags">新規出店PJ | 商品開発／オペレーション設計／購買・食材開拓</p></div></div>
+          </li>
+          <li class="work-group">
+            <div class="work"><span class="work__no">D</span><div class="work__body"><p class="work__name">DE FRITES STAAN HARAJUKU（東京）</p><p class="work__tags">新規出店PJ | 商品開発／オペレーション設計／購買・食材開拓／HR Design／現場と経営の接続</p></div></div>
+            <div class="work"><span class="work__no" aria-hidden="true"></span><div class="work__body"><p class="work__name">DE FRITES STAAN（京都）</p><p class="work__tags">新規出店PJ | 商品開発／オペレーション設計／購買・食材開拓／HR Design／現場と経営の接続</p></div></div>
+          </li>
+          <li class="work-group">
+            <div class="work"><span class="work__no">H</span><div class="work__body"><p class="work__name">HEIM COFFEE（東京）</p><p class="work__tags">既存店PJ | 商品開発／オペレーション設計／購買・食材開拓／現場と経営の接続</p></div></div>
+          </li>
+          <li class="work-group">
+            <div class="work"><span class="work__no">O</span><div class="work__body"><p class="work__name">ORIOLE Nectar and Bites（東京etc）</p><p class="work__tags">新規出店PJ | 商品開発／オペレーション設計／購買・食材開拓</p></div></div>
+            <div class="work"><span class="work__no" aria-hidden="true"></span><div class="work__body"><p class="work__name">OSU PUDDING LABORATORIES（名古屋）</p><p class="work__tags">新規出店PJ | 商品開発／オペレーション設計／購買・食材開拓</p></div></div>
+          </li>
+          <li class="work-group">
+            <div class="work"><span class="work__no">W</span><div class="work__body"><p class="work__name">WORK&amp;FIKA（宮崎）</p><p class="work__tags">既存店PJ | オペレーション設計／現場と経営の接続</p></div></div>
+          </li>
+          <li class="work-group">
+            <div class="work"><span class="work__no">ま</span><div class="work__body"><p class="work__name">まちノ食堂（横浜）</p><p class="work__tags">新規出店PJ | 商品開発／オペレーション設計／購買・食材開拓</p></div></div>
+            <div class="work"><span class="work__no" aria-hidden="true"></span><div class="work__body"><p class="work__name">まちノ麦酒パーラー（横浜）</p><p class="work__tags">新規出店PJ | 商品開発／オペレーション設計／購買・食材開拓</p></div></div>
+          </li>
+          <!-- ▼ Own Brand（POPUPで種をまくフェーズの実績 F→K→U ＋ 末尾にcoming枠） -->
+          <li class="work-group">
+            <p class="work-head">Own Brand</p>
+            <div class="work"><span class="work__no">F</span><div class="work__body"><p class="work__name">FISH&amp;FRITES PJ（東京）@新宿サザンテラス</p><p class="work__tags">イベントPJ | 商品開発／オペレーション設計／購買・食材開拓</p></div></div>
+          </li>
+          <li class="work-group">
+            <div class="work"><span class="work__no">K</span><div class="work__body"><p class="work__name">KINAN FISH PJ（東京）@CHE333</p><p class="work__tags">イベントPJ | 商品開発／オペレーション設計／購買・食材開拓</p></div></div>
+          </li>
+          <li class="work-group">
+            <div class="work"><span class="work__no">U</span><div class="work__body"><p class="work__name">UNUSED FISH PJ（和歌山）@すさみ町カンファレンス</p><p class="work__tags">イベントPJ | 商品開発／オペレーション設計／購買・食材開拓</p></div></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ⑦ 出口＝二つの窓（唯一、薄い囲みOK＝アクションの場所。窓の言葉は動詞で・相手の名詞ラベルは見せない／本文はプレースホルダー） -->
+    <section class="section" aria-label="二つの窓">
+      <div class="wrap">
+        <p class="label">Contact</p>
+        <!-- 前置き（二つの窓の上に一言）。英字・囲みの外・ネイビー・bold無し・末尾カンマで開く -->
+        <p class="contact__intro">IF THIS RESONATES,</p>
+        <div class="windows">
+          <!-- 窓1：押すと直下にフォームが開く（source=work）。英字メイン＋日本語サブ・ラベル名は出さない -->
+          <button type="button" class="window" data-source="work" aria-expanded="false" aria-controls="contact-panel">
+            <span class="window__en">WORK WITH US</span>
+            <span class="window__ja">お仕事のご相談はこちらから。</span>
+          </button>
+          <!-- 窓2：押すと直下にフォームが開く（source=create）。今すぐの募集ではない／ラベル名は出さない -->
+          <button type="button" class="window" data-source="create" aria-expanded="false" aria-controls="contact-panel">
+            <span class="window__en">CREATE WITH US</span>
+            <span class="window__ja">一緒になにかつくれる人を探しています。</span>
+          </button>
+          <!-- 共通フォーム（1つ）。押した窓の直下へJSで移動し source=work/create を識別。送信はNetlify Forms＋AJAXで同ページ完結 -->
+          <div class="contact-panel" id="contact-panel" hidden>
+            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+              <input type="hidden" name="form-name" value="contact">
+              <input type="hidden" name="source" value="">
+              <p class="hp"><label>このフィールドは空欄のままにしてください<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+              <div class="contact-fields">
+                <div class="field">
+                  <label for="cf-name">名前</label>
+                  <input id="cf-name" name="name" type="text" autocomplete="name" required>
+                </div>
+                <div class="field">
+                  <label for="cf-email">メールアドレス</label>
+                  <input id="cf-email" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="field">
+                  <label for="cf-company">会社名（任意）</label>
+                  <input id="cf-company" name="company" type="text" autocomplete="organization">
+                </div>
+                <div class="field">
+                  <label for="cf-tel">電話番号（任意）</label>
+                  <input id="cf-tel" name="tel" type="tel" autocomplete="tel">
+                </div>
+                <div class="field">
+                  <label for="cf-message">問い合わせ内容</label>
+                  <textarea id="cf-message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="contact-submit">送信する</button>
+              </div>
+              <p class="contact-done" hidden>送信しました。</p>
+              <p class="contact-error" hidden>送信できませんでした。時間をおいて、もう一度お試しください。</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑨ 会社情報＝COMPANY（CONTACTからの切り替え合図一語＋二社プロフィール＋両社住所）。並ぶ構図でアライアンスを示す。資本関係は書かない -->
+    <section class="company" aria-label="会社情報">
+      <div class="wrap">
+        <!-- 切り替え合図。WORKS大見出しと完全同一の体裁（chapter__title）。aboutや説明文は作らない＝COMPANYの一語のみ -->
+        <p class="chapter__title">COMPANY</p>
+        <!-- 上＝mssb（渡部）＝主。写真サイズは下と同一・主従は順序と縦の間隔だけで出す。住所はこの社の直下で完結 -->
+        <div class="profile">
+          <div class="profile__photo">
+            <img src="img/mssbworks_about_watabe_mono.png" alt="渡部龍哉" width="1000" height="1250" loading="lazy" decoding="async">
+          </div>
+          <div class="profile__text">
+            <p class="profile__main">株式会社ムササビ</p>
+            <p class="profile__main">代表取締役　渡部龍哉</p>
+            <p class="profile__sub">mssbworks</p>
+            <p class="profile__sub">CEO/Food Director<br>Tatsuya Watabe</p>
+            <p class="profile__addr">〒151-0051　東京都渋谷区千駄ヶ谷3-6-5 司マンション302</p>
+          </div>
+        </div>
+        <!-- 下＝リトロダクション（中島）＝並走。写真サイズはmssbと同一。住所はこの社の直下で完結 -->
+        <div class="profile">
+          <div class="profile__photo">
+            <img src="img/mssbworks_about_nakajima_mono.png" alt="中島晋平" width="1000" height="1250" loading="lazy" decoding="async">
+          </div>
+          <div class="profile__text">
+            <p class="profile__main">株式会社リトロダクション</p>
+            <p class="profile__main">代表取締役　中島晋平</p>
+            <p class="profile__sub">retroduction</p>
+            <p class="profile__sub">CEO/Project Director<br>Shinpei Nakajima</p>
+            <p class="profile__addr">〒151-0051　東京都渋谷区千駄ヶ谷3-8-4 メゾンジャルダン503</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CONTACT：二つの窓のアコーディオン（同時に1つ・再タップで閉じる・演出なしの瞬時開閉）＋Netlify Formsの同ページ送信 -->
+  <script>
+    (function(){
+      var panel = document.getElementById('contact-panel');
+      if(!panel) return;
+      var form   = panel.querySelector('form');
+      var source = form.elements['source'];
+      var fields = form.querySelector('.contact-fields');
+      var done   = form.querySelector('.contact-done');
+      var errMsg = form.querySelector('.contact-error');
+      var windows = Array.prototype.slice.call(document.querySelectorAll('.windows .window'));
+      var openBtn = null;
+
+      function closePanel(){
+        panel.hidden = true;
+        if(openBtn){ openBtn.setAttribute('aria-expanded','false'); }
+        openBtn = null;
+      }
+      function openUnder(btn){
+        openBtn = btn;
+        windows.forEach(function(b){ b.setAttribute('aria-expanded', b === btn ? 'true' : 'false'); });
+        source.value = btn.getAttribute('data-source');     // work / create を識別
+        fields.hidden = false; done.hidden = true; errMsg.hidden = true;  // 開くたびフォーム表示に戻す
+        btn.after(panel);                                   // 押した窓の直下へ移動
+        panel.hidden = false;
+      }
+      windows.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if(openBtn === btn){ closePanel(); } else { openUnder(btn); }
+        });
+      });
+
+      // 送信：別ページに遷移せず、同じ場所に確認メッセージ（Netlify Forms / AJAX）
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        errMsg.hidden = true;
+        var body = new URLSearchParams(new FormData(form)).toString();
+        fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:body })
+          .then(function(r){ if(!r.ok){ throw new Error(r.status); }
+            fields.hidden = true; done.hidden = false;       // 「送信しました。」を同位置に表示
+          })
+          .catch(function(){ errMsg.hidden = false; });
+      });
+    })();
+  </script>
+
+</body>
+</html>
