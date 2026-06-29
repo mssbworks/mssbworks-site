@@ -242,7 +242,8 @@ body::before{
 .work + .work{ margin-top:.9em; }               /* 同一グループ内の2件目以降は線なしで詰める（束ねが見える） */
 .work__no{ flex:none; min-width:1.1em; font-family:var(--font-en); font-size:.78rem; letter-spacing:.1em; color:var(--ink-faint); }  /* 頭文字：薄く・小さく・控えめ（索引の記号）。「ま」も同じ見た目 */
 .work__body{ flex:1; min-width:0; }
-.work-head{ font-family:var(--font-en); font-size:var(--fs-hero); font-weight:500; letter-spacing:.04em; color:var(--ink); margin:0 0 .7em; }  /* 事業見出し Consulting／Own Brand：BUSINESSの事業名と同体裁（大・ネイビー・英字）・2つ完全対称 */
+.work-head{ font-family:var(--font-en); font-size:var(--fs-hero); font-weight:500; letter-spacing:.04em; color:var(--ink); margin:0 0 .7em; }  /* グループ見出し Consulting／Event／Original：BUSINESSの事業名と同体裁（大・ネイビー・英字）・3つ揃える */
+.work-launch{ margin:0; padding-left:var(--s3); font-family:var(--font-en); font-size:.82rem; letter-spacing:.1em; color:var(--ink-faint); }  /* Original（予告のみ）の時期表記 LAUNCH 2026 WINTER：BUSINESS Originalと同体裁・薄グレー */
 .work__name{ font-size:clamp(.92rem, .88rem + .2vw, 1.02rem); line-height:1.4; margin:0; }   /* PJ名：さらに一段小さく（短名はスマホ1行に）・ネイビー */
 .work__tags{ font-size:clamp(.8rem, .77rem + .14vw, .88rem); color:var(--ink-soft); line-height:1.8; margin:.28em 0 0; }  /* 業務内容：サイズだけ下げ、色（薄グレー）は据え置き・更に薄くしない */
 
