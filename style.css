@@ -260,7 +260,7 @@ body::before{
   text-align:left;
   background:transparent;
   border:1px solid rgba(35,49,72,.22);  /* 薄い囲み（地に、ここだけ枠＝種類が変わる合図） */
-  padding:var(--s3) var(--s4);          /* 上下を詰めて出口を締める（左右はそのまま） */
+  padding:1.15rem 1.8rem;               /* 細め（WORK基準のスリムなボックス） */
   font:inherit;
   color:inherit;
   cursor:pointer;
@@ -269,7 +269,7 @@ body::before{
 .window:focus-visible{ outline:2px solid var(--ink-soft); outline-offset:2px; }
 .contact__intro{ font-family:var(--font-en); font-size:var(--fs-lead); letter-spacing:.1em; color:var(--ink); margin:0 0 var(--s4); }   /* 前置き IF THIS RESONATES,：英字・ネイビー・囲みの外/上・bold無し */
 .window__en{ display:block; font-family:var(--font-en); font-size:clamp(1rem, .96rem + .35vw, 1.14rem); letter-spacing:.12em; line-height:1.35; color:var(--ink); margin:0; }   /* CONTACTの英字メイン：出口は静かに＝Values見出し/IF THIS RESONATESより小さく */
-.window__ja{ display:block; font-size:var(--fs-body); color:var(--ink-faint); line-height:1.6; margin:.55em 0 0; }   /* 日本語サブ：薄グレー#9AA0AC・一段小さく（英字の下） */
+.window__ja{ display:block; font-size:clamp(.8rem, .68rem + .55vw, 1.05rem); color:var(--ink-faint); line-height:1.6; margin:.5em 0 0; }   /* 日本語サブ：薄グレー。狭い画面でも1行に収めてボックスを細く（PCは従来サイズ） */
 
 /* --- ⑦ 二つの窓のフォーム（アコーディオン／装飾は最小・角丸/影なし・bold無し） -- */
 .contact-panel{ padding:var(--s2) var(--s4) var(--s3); }     /* 押した窓の直下に開く・窓の内側に揃える */
@@ -320,15 +320,15 @@ body::before{
 /* --- ⑨ 会社情報（二社のプロフィール：見出しなし・写真左/テキスト右・縦積み。並ぶ構図でアライアンスを示す） -- */
 .company{ padding-block:var(--s7); }
 .company__lead{ margin:calc(-1 * var(--s3)) 0 var(--s4); font-size:clamp(.82rem, .79rem + .14vw, .9rem); color:var(--ink-faint); line-height:1.7; }   /* COMPANYラベル直下・関係の一行：薄グレー・小さめ・控えめ */
-.profile{ display:flex; align-items:center; gap:clamp(1.1rem, 4vw, 2.2rem); }
+.profile{ display:flex; align-items:flex-start; gap:clamp(1.1rem, 4vw, 2.2rem); }   /* 写真は自然な4:5（間延びさせない）。上揃えで文章が写真の上端から始まる */
 .profile + .profile{ margin-top:var(--s5); }      /* 二社の間＝主従の唯一の差。各ブロック内の余白よりはっきり広く（線・ラベルは使わない・写真は同サイズ） */
-.profile__photo{ flex:none; width:clamp(7rem, 27vw, 11.5rem); }    /* 二社とも同一幅・一段小さく（写真は静かに添える＝テキスト主）。4:5で高さも揃う */
-.profile__photo img{ display:block; width:100%; height:auto; }       /* 4:5・角丸/枠線/影なし（地に直に乗る） */
+.profile__photo{ flex:none; width:clamp(8.5rem, 36vw, 11.5rem); }    /* 二社とも同一幅。スマホでも写真を大きめにして文章高さと揃える（ロゴが収まる範囲で最大／PC=11.5rem上限は不変） */
+.profile__photo img{ display:block; width:100%; height:auto; }   /* 自然な4:5（伸縮/トリミングなし）。角丸/枠線/影なし */
 .profile__text{ flex:1; min-width:0; }
 .profile__logo{ margin:0 0 .55em; line-height:1; }                /* 社名の頭に小さくロゴ＝視覚リズム（誇示しない）。2社で同サイズ・同位置 */
 .profile__logo img{ display:block; height:1.1rem; width:auto; }  /* mssb＝Mマーク（小さめのアクセント＝ワードマークを主役にしてメリハリ） */
 .profile__logo--lockup{ display:flex; align-items:center; gap:.32em; }   /* mssb＝M＋mssbworks の横組みロックアップ */
-.profile__wm{ font-family:var(--font-jp); font-size:1.55rem; line-height:1; letter-spacing:.01em; color:#243249; }  /* ワードマーク mssbworks＝主役（Mマークより大きく）。游ゴシック・#243249 */
+.profile__wm{ font-family:var(--font-jp); font-size:clamp(1.34rem, 1.05rem + 1.2vw, 1.55rem); line-height:1; letter-spacing:.01em; color:#243249; }  /* ワードマーク mssbworks＝主役。PCは1.55rem／狭い画面は少し縮めて収める（写真拡大で列が狭くなった分の収まり確保） */
 .profile__logo--r{ font-family:var(--font-jp); font-size:1.6rem; color:var(--ink-faint); }  /* retro＝薄グレー仮R（公開前に正式ロゴへ差替） */
 .profile__main{ font-size:clamp(.86rem, .83rem + .15vw, .94rem); color:var(--ink); line-height:1.5; margin:0; }  /* 社名・代表氏名＝ネイビー。ロゴより一段小さく（ロゴ＞文章のメリハリ） */
 .profile__main + .profile__main{ margin-top:.12em; }
@@ -337,5 +337,20 @@ body::before{
 
 /* --- ⑨ 各社の住所＝事実情報（薄グレー小・bold無し）。各社プロフィールの直下に置き、1社で完結 -- */
 .profile__addr{ font-size:clamp(.74rem, .72rem + .1vw, .8rem); color:var(--ink-faint); line-height:1.6; margin:.6em 0 0; }   /* 肩書きより一段小さく・薄グレー。〒の直前を少し空けて住所と分かる */
+.profile__web{ margin:.5em 0 0; font-family:var(--font-en); font-size:clamp(.74rem, .72rem + .1vw, .8rem); letter-spacing:.01em; }   /* retro Webサイト併記 */
+.profile__web a{ color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px; }
+.profile__web a:hover{ color:var(--ink); }
 
 /* 書体は游ゴシックで確定（--font-jp が游ゴシック先頭。レビュー用スイッチャーは公開のため削除済み） */
+
+/* --- スマホのみ：COMPANYの文章を詰めて、写真の高さ内に収める（特にretro/中島の下はみ出し対策） --- */
+@media (max-width: 560px){
+  .profile__logo{ margin-bottom:.4em; }
+  .profile__logo--r{ font-size:1.34rem; }                         /* 仮R＝mssbロックアップと同程度に小さく＝行を詰める */
+  .profile__main{ font-size:.79rem; line-height:1.38; }
+  .profile__main + .profile__main{ margin-top:.06em; }
+  .profile__sub{ font-size:.71rem; line-height:1.38; }
+  .profile__main + .profile__sub{ margin-top:.36em; }
+  .profile__addr{ font-size:.69rem; line-height:1.45; margin-top:.42em; }
+  .profile__web{ font-size:.69rem; margin-top:.34em; }
+}
