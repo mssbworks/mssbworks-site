@@ -325,12 +325,17 @@ body::before{
 .profile__photo{ flex:none; width:clamp(7rem, 27vw, 11.5rem); }    /* 二社とも同一幅・一段小さく（写真は静かに添える＝テキスト主）。4:5で高さも揃う */
 .profile__photo img{ display:block; width:100%; height:auto; }       /* 4:5・角丸/枠線/影なし（地に直に乗る） */
 .profile__text{ flex:1; min-width:0; }
-.profile__main{ font-size:clamp(.95rem, .9rem + .22vw, 1.06rem); color:var(--ink); line-height:1.5; margin:0; }  /* 社名・代表氏名＝ネイビー */
+.profile__logo{ margin:0 0 .55em; line-height:1; }                /* 社名の頭に小さくロゴ＝視覚リズム（誇示しない）。2社で同サイズ・同位置 */
+.profile__logo img{ display:block; height:1.1rem; width:auto; }  /* mssb＝Mマーク（小さめのアクセント＝ワードマークを主役にしてメリハリ） */
+.profile__logo--lockup{ display:flex; align-items:center; gap:.32em; }   /* mssb＝M＋mssbworks の横組みロックアップ */
+.profile__wm{ font-family:var(--font-jp); font-size:1.55rem; line-height:1; letter-spacing:.01em; color:#243249; }  /* ワードマーク mssbworks＝主役（Mマークより大きく）。游ゴシック・#243249 */
+.profile__logo--r{ font-family:var(--font-jp); font-size:1.6rem; color:var(--ink-faint); }  /* retro＝薄グレー仮R（公開前に正式ロゴへ差替） */
+.profile__main{ font-size:clamp(.86rem, .83rem + .15vw, .94rem); color:var(--ink); line-height:1.5; margin:0; }  /* 社名・代表氏名＝ネイビー。ロゴより一段小さく（ロゴ＞文章のメリハリ） */
 .profile__main + .profile__main{ margin-top:.12em; }
-.profile__sub{ font-family:var(--font-en); font-size:clamp(.82rem, .79rem + .14vw, .9rem); color:var(--ink-faint); line-height:1.5; margin:0; letter-spacing:.01em; }  /* 屋号ローマ字・英字肩書き＝薄グレー・一段小さく */
+.profile__sub{ font-family:var(--font-en); font-size:clamp(.75rem, .72rem + .12vw, .82rem); color:var(--ink-faint); line-height:1.5; margin:0; letter-spacing:.01em; }  /* 屋号ローマ字・英字肩書き＝薄グレー・社名より一段小さく */
 .profile__main + .profile__sub{ margin-top:.5em; }   /* 社名群と屋号群の間を少し空ける（bold無し・強弱は色とサイズで） */
 
 /* --- ⑨ 各社の住所＝事実情報（薄グレー小・bold無し）。各社プロフィールの直下に置き、1社で完結 -- */
-.profile__addr{ font-size:clamp(.8rem, .77rem + .13vw, .88rem); color:var(--ink-faint); line-height:1.6; margin:.6em 0 0; }   /* 肩書きより一段小さく・薄グレー。〒の直前を少し空けて住所と分かる */
+.profile__addr{ font-size:clamp(.74rem, .72rem + .1vw, .8rem); color:var(--ink-faint); line-height:1.6; margin:.6em 0 0; }   /* 肩書きより一段小さく・薄グレー。〒の直前を少し空けて住所と分かる */
 
 /* 書体は游ゴシックで確定（--font-jp が游ゴシック先頭。レビュー用スイッチャーは公開のため削除済み） */
