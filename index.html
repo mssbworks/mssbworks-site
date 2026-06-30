@@ -196,12 +196,13 @@
             <span class="window__en">CREATE WITH US</span>
             <span class="window__ja">一緒につくれる人を探しています。</span>
           </button>
-          <!-- 共通フォーム（1つ）。押した窓の直下へJSで移動し source=work/create を識別。送信はNetlify Forms＋AJAXで同ページ完結 -->
+          <!-- 共通フォーム（1つ）。押した窓の直下へJSで移動し source=work/create を識別。送信はWeb3Forms＋AJAXで同ページ完結 -->
           <div class="contact-panel" id="contact-panel" hidden>
-            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
-              <input type="hidden" name="form-name" value="contact">
+            <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+              <input type="hidden" name="access_key" value="c66047d3-dc98-4911-8b6a-f69b80456201">
+              <input type="hidden" name="subject" value="mssbworks サイトからのお問い合わせ">
               <input type="hidden" name="source" value="">
-              <p class="hp"><label>このフィールドは空欄のままにしてください<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+              <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true">
               <div class="contact-fields">
                 <div class="field">
                   <label for="cf-name">名前</label>
@@ -308,14 +309,15 @@
         });
       });
 
-      // 送信：別ページに遷移せず、同じ場所に確認メッセージ（Netlify Forms / AJAX）
+      // 送信：別ページに遷移せず、同じ場所に確認メッセージ（Web3Forms / AJAX）
       form.addEventListener('submit', function(e){
         e.preventDefault();
         errMsg.hidden = true;
-        var body = new URLSearchParams(new FormData(form)).toString();
-        fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:body })
-          .then(function(r){ if(!r.ok){ throw new Error(r.status); }
-            fields.hidden = true; done.hidden = false;       // 「送信しました。」を同位置に表示
+        fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form) })
+          .then(function(r){ return r.json(); })
+          .then(function(json){
+            if(json.success){ fields.hidden = true; done.hidden = false; }   // 「送信しました。」を同位置に表示
+            else { errMsg.hidden = false; }
           })
           .catch(function(){ errMsg.hidden = false; });
       });
