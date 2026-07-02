@@ -328,8 +328,8 @@ body::before{
 .profile__logo{ margin:0 0 .55em; line-height:1; }                /* 社名の頭に小さくロゴ＝視覚リズム（誇示しない）。2社で同サイズ・同位置 */
 .profile__logo img{ display:block; height:1.1rem; width:auto; }  /* mssb＝Mマーク（小さめのアクセント＝ワードマークを主役にしてメリハリ） */
 .profile__logo--lockup{ display:flex; align-items:center; gap:.32em; }   /* mssb＝M＋mssbworks の横組みロックアップ */
-.profile__wm{ font-family:var(--font-jp); font-size:clamp(1.34rem, 1.05rem + 1.2vw, 1.55rem); line-height:1; letter-spacing:.01em; color:#243249; }  /* ワードマーク mssbworks＝主役。PCは1.55rem／狭い画面は少し縮めて収める（写真拡大で列が狭くなった分の収まり確保） */
-.profile__logo--r{ font-family:var(--font-jp); font-size:1.6rem; color:var(--ink-faint); }  /* retro＝薄グレー仮R（公開前に正式ロゴへ差替） */
+.profile__wm{ font-family:var(--font-jp); font-size:clamp(1.26rem, 1rem + 1.1vw, 1.45rem); line-height:1; letter-spacing:.01em; color:#243249; }  /* ワードマーク mssbworks＝主役（やや縮小）。PCは1.45rem／狭い画面は少し縮めて収める */
+.profile__logo--retro img{ display:block; height:clamp(1.75rem, 1.35rem + 1.55vw, 2.2rem); width:auto; mix-blend-mode:multiply; }  /* retro正式ロゴ＝K100黒を地(オフホワイト)に馴染ませる(multiply)。少し小さめ */
 .profile__main{ font-size:clamp(.86rem, .83rem + .15vw, .94rem); color:var(--ink); line-height:1.5; margin:0; }  /* 社名・代表氏名＝ネイビー。ロゴより一段小さく（ロゴ＞文章のメリハリ） */
 .profile__main + .profile__main{ margin-top:.12em; }
 .profile__sub{ font-family:var(--font-en); font-size:clamp(.75rem, .72rem + .12vw, .82rem); color:var(--ink-faint); line-height:1.5; margin:0; letter-spacing:.01em; }  /* 屋号ローマ字・英字肩書き＝薄グレー・社名より一段小さく */
@@ -349,7 +349,7 @@ body::before{
 /* --- スマホのみ：COMPANYの文章を詰めて、写真の高さ内に収める（特にretro/中島の下はみ出し対策） --- */
 @media (max-width: 560px){
   .profile__logo{ margin-bottom:.4em; }
-  .profile__logo--r{ font-size:1.34rem; }                         /* 仮R＝mssbロックアップと同程度に小さく＝行を詰める */
+  .profile__logo--retro img{ height:1.7rem; }                     /* retroロゴ＝モバイルは小さめ（写真の枠内に収める） */
   .profile__main{ font-size:.79rem; line-height:1.36; }
   .profile__main + .profile__main{ margin-top:.06em; }
   .profile__sub{ font-size:.71rem; line-height:1.34; }
