@@ -225,7 +225,7 @@ body::before{
 }
 .biz{ margin-top:0; }
 .biz__item{ border-top:1px solid var(--hair); padding:var(--s4) 0; }
-.biz__item--quiet{ color:var(--ink-soft); }   /* Tools は寡黙に（濃淡） */
+.biz__item--quiet .biz__verb{ color:var(--ink); }   /* Tools本文＝Originalと同じネイビー（旧: ブロック全体を寡黙グレーにしていた。本人指示で本文はネイビーに揃える） */
 .biz__head{ display:flex; align-items:baseline; gap:.5em; margin:0; }
 .biz__en{ font-family:var(--font-en); font-size:var(--fs-hero); font-weight:500; letter-spacing:.04em; color:var(--ink); }  /* 英字＝主役（ネイビー・大・太字にしない） */
 .biz__ja{ font-size:.85rem; color:var(--ink-faint); }   /* 日本語＝識別用（薄く・小さく） */
