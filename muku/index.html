@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ムク — mssbworks</title>
+  <link rel="apple-touch-icon-precomposed" sizes="512x512" href="../img/apple-touch-icon.png?v=12">
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png?v=12">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* このページだけの体裁。トークンは style.css の :root をそのまま使う。 */
+    .muku{ padding-block:var(--s5) var(--s6); }
+    .muku__title{
+      font-size:var(--fs-hero);
+      line-height:var(--lh-hero);
+      margin:0 0 var(--s3);
+    }
+    .muku__body p{ margin:0 0 var(--s3); }
+    .muku__body p:last-child{ margin-bottom:0; }
+    .muku__rule{ border:0; border-top:1px solid var(--hair); margin:var(--s5) 0 var(--s4); }
+    .muku__sub{ font-size:var(--fs-lead); line-height:var(--lh-lead); margin:0 0 var(--s3); }
+    .muku__note{ font-size:var(--fs-small); color:var(--ink-soft); line-height:1.9; }
+    .muku__form{ margin:var(--s4) 0 var(--s3); max-width:24rem; }
+    .muku__link,
+    .muku__back{
+      display:inline-block;
+      font-size:var(--fs-small);
+      color:var(--ink-soft);
+      text-decoration:none;
+      border-bottom:1px solid var(--hair);
+      padding-bottom:.12em;
+    }
+    .muku__back{ margin-top:var(--s4); }
+    .muku__link:hover,
+    .muku__back:hover{ color:var(--ink); border-bottom-color:var(--ink-soft); }
+  </style>
+</head>
+<body>
+
+  <a class="logo" href="../" style="text-decoration:none;">mssbworks</a>
+
+  <main>
+    <section class="muku" aria-label="ムク">
+      <div class="wrap">
+        <p class="label">Tools</p>
+        <p class="muku__title">ムク</p>
+
+        <div class="muku__body">
+          <p>飲食店のレジのジャーナルを読んで、数字の検算と分析をし、店との対話を通して論点を整理する道具です。Claudeの中で「スキル」として動きます。</p>
+          <p>買って終わりではなく、使うほど店の事情を覚えて読みが深くなる。育てるコンサルです。</p>
+          <!-- TODO(2026-09-01): 販売記事を公開したら、記事のURLに差し替える。いまはnoteのアカウントを指している -->
+          <p><a class="muku__link" href="https://note.com/mssbworks" target="_blank" rel="noopener">noteで販売しています</a></p>
+        </div>
+
+        <hr class="muku__rule">
+
+        <p class="muku__sub">改修のお知らせ</p>
+
+        <div class="muku__body">
+          <p>ムクは今後も改修を重ねていきます。対応するレジを増やしたり、読みの精度を上げたり。</p>
+          <p>大きな改修があったとき、買っていただいた方にメールでお知らせします。それ以外は送りません。</p>
+        </div>
+
+        <!-- 送信は Web3Forms ＋ AJAX で同ページ完結（トップの問い合わせフォームと同じ鍵・件名だけ分けている） -->
+        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form muku__form">
+          <input type="hidden" name="access_key" value="c66047d3-dc98-4911-8b6a-f69b80456201">
+          <input type="hidden" name="subject" value="ムク・改修のお知らせ登録">
+          <input type="hidden" name="from_name" value="ムク 改修のお知らせ">
+          <input type="hidden" name="source" value="muku-update">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true">
+          <div class="contact-fields">
+            <div class="field">
+              <label for="mf-email">メールアドレス</label>
+              <input id="mf-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            </div>
+            <button type="submit" class="contact-submit">登録する</button>
+          </div>
+          <p class="contact-done" hidden>登録しました。大きな改修があったときに、このアドレスへお知らせします。</p>
+          <p class="contact-error" hidden>登録できませんでした。時間をおいて、もう一度お試しください。</p>
+        </form>
+
+        <p class="muku__note">いただいたアドレスは、このお知らせ以外には使いません。やめたいときは、届いたメールにそのまま返信してください。</p>
+
+        <a class="muku__back" href="../">mssbworks について</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function(){
+      var form = document.querySelector('.muku__form');
+      if(!form) return;
+      var fields = form.querySelector('.contact-fields');
+      var done   = form.querySelector('.contact-done');
+      var errMsg = form.querySelector('.contact-error');
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        errMsg.hidden = true;
+        fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form) })
+          .then(function(r){ return r.json(); })
+          .then(function(json){
+            if(json.success){ fields.hidden = true; done.hidden = false; }
+            else { errMsg.hidden = false; }
+          })
+          .catch(function(){ errMsg.hidden = false; });
+      });
+    })();
+  </script>
+
+</body>
+</html>
