@@ -1,0 +1,19 @@
+{
+  // mssbworks.com の配信。いまはGitHub Pagesで動いている。
+  // これはWorkersへ引っ越すための設定で、まだ本番のドメインには繋いでいない。
+  //
+  // 引っ越しの順番（docs側の移行メモと揃える）:
+  //   1. これをデプロイして workers.dev のURLで見えるようにする
+  //   2. scripts/検収.py でGitHub Pages版と全ファイルのハッシュを突き合わせる
+  //   3. 一致してから、DNSをCloudflareに移し、ルートをこのWorkerに向ける
+  //   4. GitHub Pages側はしばらく残す（戻せるように）
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mssbworks-site",
+  "compatibility_date": "2026-09-01",
+
+  // 静的ファイルを配るだけ。コードは無い
+  "assets": {
+    "directory": ".",
+    "not_found_handling": "404-page"
+  }
+}

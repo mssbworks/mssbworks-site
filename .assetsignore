@@ -1,0 +1,12 @@
+# Workersに上げないもの。これが無いと .git の中身まで公開される
+.git
+.git/**
+.wrangler
+.wrangler/**
+.cloudflare
+.cloudflare/**
+.gitignore
+.assetsignore
+wrangler.jsonc
+README.md
+CNAME
