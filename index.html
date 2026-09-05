@@ -346,9 +346,19 @@
       function openFromHash(){
         if(location.hash !== '#contact' || !windows.length){ return; }
         openUnder(windows[0]);
-        panel.scrollIntoView({ behavior:'smooth', block:'center' });
+        // 窓から押したのではないので、どの窓かの印は付けない。
+        // ここを 'work' や 'create' のままにすると、不具合の報告が
+        // 「仕事の相談」として記録される
+        source.value = 'contact';
+        // **なめらかスクロールにしない。**フォームはページの8,000px下にあり、
+        // 途中で止まる（2026-09-05に実際に止まった）。深いリンクは一息で着けるほうがいい。
+        // 画像の読み込みで位置が動くので、次のフレームまで待ってから測る
+        requestAnimationFrame(function(){
+          panel.scrollIntoView({ block:'center' });
+        });
       }
       window.addEventListener('hashchange', openFromHash);
+      window.addEventListener('load', openFromHash);   // 画像が入って位置が確定してから、もう一度
       openFromHash();
 
       // 送信：別ページに遷移せず、同じ場所に確認メッセージ（Web3Forms / AJAX）
