@@ -340,10 +340,31 @@
       });
 
       // 送信：別ページに遷移せず、同じ場所に確認メッセージ（Web3Forms / AJAX）
+      //
+      // 2026-09-05から、うちのWorkerにも同じ内容を送っている（並走）。
+      // 預け先をWeb3Formsからうちへ移すための準備で、両方に届くのを見てから
+      // あちらを切る。**画面の成否はWeb3Forms側だけで決める。**Workerが落ちても
+      // 問い合わせが送れなくなってはいけないので、こちらの失敗は握りつぶす
+      // （ただしコンソールには出す。黙って消えると並走の確認ができない）。
+      var WORKER = 'https://muku-mcp.muku-mcp.workers.dev/api/contact';
+
       form.addEventListener('submit', function(e){
         e.preventDefault();
         errMsg.hidden = true;
-        fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form) })
+        var fd = new FormData(form);
+
+        // 控えの送信。await しない（画面を待たせない）
+        var body = {};
+        fd.forEach(function(v, k){ body[k] = String(v); });
+        fetch(WORKER, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify(body)
+        }).then(function(r){
+          if(!r.ok){ console.warn('控えの送信が失敗しました', r.status); }
+        }).catch(function(err){ console.warn('控えの送信が失敗しました', err); });
+
+        fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Accept':'application/json'}, body: fd })
           .then(function(r){ return r.json(); })
           .then(function(json){
             if(json.success){ fields.hidden = true; done.hidden = false; }   // 「送信しました。」を同位置に表示
