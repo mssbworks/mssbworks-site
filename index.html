@@ -339,6 +339,18 @@
         });
       });
 
+      // #contact で来たら、フォームを開いた状態で見せる。
+      // ムクが「数字が合わなかったらここへ」と出す先がここなので、
+      // **開いてURLを踏んだのに何も無い、という状態を作らない。**
+      // 押して開く作りなので、リンクだけ配ると空のトップページに着く（2026-09-05に気づいた）
+      function openFromHash(){
+        if(location.hash !== '#contact' || !windows.length){ return; }
+        openUnder(windows[0]);
+        panel.scrollIntoView({ behavior:'smooth', block:'center' });
+      }
+      window.addEventListener('hashchange', openFromHash);
+      openFromHash();
+
       // 送信：別ページに遷移せず、同じ場所に確認メッセージ（Web3Forms / AJAX）
       //
       // 2026-09-05から、うちのWorkerにも同じ内容を送っている（並走）。
