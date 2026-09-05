@@ -103,6 +103,45 @@
 
         <p class="muku__note">いただいたアドレスは、このお知らせ以外には使いません。やめたいときは、届いたメールにそのまま返信してください。</p>
 
+        <hr class="muku__rule">
+
+        <!-- ムクの窓口。ムクが「検算が合いませんでした」と出すときの送り先もここ。
+             送り先はトップの問い合わせと同じ（Web3Forms＋うちのWorker）で、
+             source で見分ける。**窓口を2つにしない**——記録が2箇所に散ると片方が腐る -->
+        <p class="muku__sub" id="help">うまくいかないとき</p>
+
+        <div class="muku__body">
+          <p>数字が合わない。動かない。データが読み込めない。ムクが「検算が合いませんでした」と言ったときも、ここから送ってください。</p>
+          <p><strong>原因はたいていこちら側です。</strong>そのレジをまだ正しく読めていない、というだけのことが多いので、お店の入力を疑う前に送ってもらえると早く直せます。</p>
+        </div>
+
+        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form muku__form" data-source="muku-help">
+          <input type="hidden" name="access_key" value="c66047d3-dc98-4911-8b6a-f69b80456201">
+          <input type="hidden" name="subject" value="ムク・うまくいかないとき">
+          <input type="hidden" name="from_name" value="ムク 窓口">
+          <input type="hidden" name="source" value="muku-help">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true">
+          <div class="contact-fields">
+            <div class="field">
+              <label for="hf-name">お店の名前</label>
+              <input id="hf-name" name="name" type="text" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label for="hf-email">メールアドレス</label>
+              <input id="hf-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            </div>
+            <div class="field">
+              <label for="hf-message">困っていること</label>
+              <textarea id="hf-message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="contact-submit">送信する</button>
+          </div>
+          <p class="contact-done" hidden>送信しました。こちらで確かめて、直せるものは直してご連絡します。</p>
+          <p class="contact-error" hidden>送信できませんでした。時間をおいて、もう一度お試しください。</p>
+        </form>
+
+        <p class="muku__note">使っているレジの名前と、どの月のことかを書いていただけると早いです。ムクが出した文をそのまま貼っていただくのが一番確かです。</p>
+
         <a class="muku__back" href="../">mssbworks について</a>
       </div>
     </section>
@@ -110,23 +149,61 @@
 
   <script>
     (function(){
-      var form = document.querySelector('.muku__form');
-      if(!form) return;
-      var fields = form.querySelector('.contact-fields');
-      var done   = form.querySelector('.contact-done');
-      var errMsg = form.querySelector('.contact-error');
+      // このページにはフォームが2つある（改修のお知らせの登録／うまくいかないとき）。
+      // どちらも同じ扱いにする。**querySelector（1つ目だけ）にしない**——
+      // 足したフォームが黙って動かない、という形の事故になる
+      var forms = Array.prototype.slice.call(document.querySelectorAll('.muku__form'));
+      if(!forms.length) return;
 
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        errMsg.hidden = true;
-        fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form) })
-          .then(function(r){ return r.json(); })
-          .then(function(json){
-            if(json.success){ fields.hidden = true; done.hidden = false; }
-            else { errMsg.hidden = false; }
-          })
-          .catch(function(){ errMsg.hidden = false; });
+      // うちのWorkerにも同じ内容を送る（並走）。預け先をWeb3Formsからうちへ移すための準備。
+      // **画面の成否はWeb3Forms側だけで決める。**Workerが落ちても送れなくなってはいけないので、
+      // こちらの失敗は握りつぶしてコンソールに出す。
+      // お知らせの登録は /api/signup、窓口は /api/contact と、受け口が違う
+      var BASE = 'https://muku-mcp.muku-mcp.workers.dev';
+
+      function alsoSend(form, fd){
+        var src = form.getAttribute('data-source') || fd.get('source') || '';
+        var path = (src === 'muku-help') ? '/api/contact' : '/api/signup';
+        var body = {};
+        fd.forEach(function(v, k){ body[k] = String(v); });
+        if(path === '/api/signup' && !body.note){ body.note = body.message || ''; }
+        fetch(BASE + path, {
+          method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)
+        }).then(function(r){
+          if(!r.ok){ console.warn('控えの送信が失敗しました', path, r.status); }
+        }).catch(function(err){ console.warn('控えの送信が失敗しました', path, err); });
+      }
+
+      forms.forEach(function(form){
+        var fields = form.querySelector('.contact-fields');
+        var done   = form.querySelector('.contact-done');
+        var errMsg = form.querySelector('.contact-error');
+
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          errMsg.hidden = true;
+          var fd = new FormData(form);
+          alsoSend(form, fd);
+          fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Accept':'application/json'}, body: fd })
+            .then(function(r){ return r.json(); })
+            .then(function(json){
+              if(json.success){ fields.hidden = true; done.hidden = false; }
+              else { errMsg.hidden = false; }
+            })
+            .catch(function(){ errMsg.hidden = false; });
+        });
       });
+
+      // #help で来たら、その位置まで一息で連れていく。
+      // ムクが出す送り先がここなので、着いたのに何も無い状態を作らない
+      function goHelp(){
+        if(location.hash !== '#help') return;
+        var el = document.getElementById('help');
+        if(el){ el.scrollIntoView({ block:'start' }); }
+      }
+      window.addEventListener('hashchange', goHelp);
+      window.addEventListener('load', goHelp);
+      goHelp();
     })();
   </script>
 

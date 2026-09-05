@@ -226,6 +226,11 @@
             <span class="window__en">CREATE WITH US</span>
             <span class="window__ja">一緒につくれる人を探しています。</span>
           </button>
+          <!-- ムクの窓口はこの2つではなく、ムクのページに置いてある。
+               ここに3つ目の窓を作らないのは、**送り先を1つに保つため**——
+               窓口が増えると記録が2箇所に散って、片方が腐る。
+               リンクだけ置いて、入口を増やす（送り先は同じところに届く） -->
+          <p class="contact__muku">飲食店向けAIスキル「ムク」のことは、<a href="/muku/#help">ムクのページ</a>からどうぞ。</p>
           <!-- 共通フォーム（1つ）。押した窓の直下へJSで移動し source=work/create を識別。送信はWeb3Forms＋AJAXで同ページ完結 -->
           <div class="contact-panel" id="contact-panel" hidden>
             <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">

@@ -368,3 +368,12 @@ body::before{
   .profile__web{ font-size:.69rem; }
   .profile__ig svg{ width:.95rem; height:.95rem; }
 }
+
+/* ムクの窓口への道案内（トップの Contact）。窓口はムクのページに1つだけ置き、
+   ここからはリンクで送る。3つ目の窓を作らないのは送り先を1つに保つため */
+.contact__muku{
+  font-size:var(--fs-small);
+  color:var(--ink-soft);
+  line-height:1.9;
+  margin:var(--s4) 0 0;
+}
