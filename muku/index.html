@@ -15,6 +15,23 @@
       line-height:var(--lh-hero);
       margin:0 0 var(--s3);
     }
+    /* ムクのロックアップ。画像を貼らずにCSSで組む。
+       ロゴのPNGは地が象牙(#fffff0)で、サイトの生成り(#f4f0ea)と違うため、
+       置くと四角い板が浮く。文字だけのロゴなので組み直せば地の問題が消えて、
+       拡大しても崩れない。色・字間・大きさの比率の正本は
+       ~/.claude/skills/mssb-brand/assets/muku_lockup.html。あちらを変えたらここも直す。
+       3行の比率は原寸（muku 320px / Restaurant Tools 36px / for long life 27px）に合わせて
+       emで持たせているので、親の font-size を変えれば全体が同じ形のまま伸縮する */
+    .muku__mark{
+      font-size:clamp(56px, 13vw, 104px);
+      margin:0 0 var(--s4);
+      font-family:"Helvetica Neue", Arial, sans-serif;
+      font-weight:400;
+    }
+    .muku__mark span{ display:block; line-height:1; }
+    .muku__wm{ font-size:1em;    font-weight:500; color:#2E6E4E; letter-spacing:.04em; }
+    .muku__l1{ font-size:.1125em; color:#243249; letter-spacing:.22em; margin-top:2.5em; }
+    .muku__l2{ font-size:.084em;  color:#6b7280; letter-spacing:.30em; margin-top:1.2em; }
     .muku__body p{ margin:0 0 var(--s3); }
     .muku__body p:last-child{ margin-bottom:0; }
     .muku__rule{ border:0; border-top:1px solid var(--hair); margin:var(--s5) 0 var(--s4); }
@@ -43,7 +60,11 @@
     <section class="muku" aria-label="ムク">
       <div class="wrap">
         <p class="label">Tools</p>
-        <p class="muku__title">ムク</p>
+        <div class="muku__mark" role="img" aria-label="ムク">
+          <span class="muku__wm">muku</span>
+          <span class="muku__l1">Restaurant Tools</span>
+          <span class="muku__l2">for long life</span>
+        </div>
 
         <div class="muku__body">
           <p>飲食店のレジのジャーナルを読んで、数字の検算と分析をし、店との対話を通して論点を整理する道具です。Claudeの中で「スキル」として動きます。</p>
