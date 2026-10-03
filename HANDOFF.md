@@ -15,6 +15,10 @@
   `origin/main` にpush済みで、未pushのものは無い
 - Cloudflare Workers版（`mssbworks-site`）は2026-09-04に一度デプロイされたまま生きているが、
   **中身が9月4日で止まっている。本番のドメインには繋がっていない**（後述）
+- 2026-10-03 Cloudflareから「ネームサーバーが4週間更新されなかったのでmssbworks.comを削除」のメール。
+  9/4に足したゾーンが、9/5にDNS移行をやめたので有効化されないまま消えただけ。
+  ネームサーバーはWix（ns12/ns13.wixdns.net）、サイト・メールとも影響なし（10/3 14:11に実測）。
+  Workers移行を再開するならゾーンの追加からやり直し
 
 ## 構成
 
@@ -109,7 +113,7 @@ python3 .cloudflare/検収.py https://mssbworks.com
 
 ## 次にやること（上から着手順）
 
-1. **Cloudflare Workers版を止めるか、上げ直すか決める。**
+1. ~~**Cloudflare Workers版を止めるか、上げ直すか決める。**~~ **済（2026-10-02 渡部「消して」→ `npx wrangler delete --name mssbworks-site` で削除。workers.dev のURLは消えた）**
    `https://mssbworks-site.muku-mcp.workers.dev/` がまだ生きていて、中身が2026-09-04のまま。
    `/privacy/` は404、`index.html` `muku/index.html` `style.css` は本番と別物。
    古いプライバシーポリシー無しのサイトが公開URLで読める状態なので、放置しない。
