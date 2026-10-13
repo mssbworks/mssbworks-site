@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ムクを買った方へ — mssbworks</title>
+  <meta name="robots" content="noindex">
+  <link rel="apple-touch-icon-precomposed" sizes="512x512" href="../../img/apple-touch-icon.png?v=12">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../img/favicon-32.png?v=12">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* このページだけの体裁。トークンは style.css の :root をそのまま使う。 */
+    .muku{ padding-block:var(--s5) var(--s6); }
+    .muku__title{
+      font-size:var(--fs-hero);
+      line-height:var(--lh-hero);
+      margin:0 0 var(--s3);
+    }
+    /* ムクのロックアップ。画像を貼らずにCSSで組む。
+       ロゴのPNGは地が象牙(#fffff0)で、サイトの生成り(#f4f0ea)と違うため、
+       置くと四角い板が浮く。文字だけのロゴなので組み直せば地の問題が消えて、
+       拡大しても崩れない。色・字間・大きさの比率の正本は
+       ~/.claude/skills/mssb-brand/assets/muku_lockup.html。あちらを変えたらここも直す。
+       3行の比率は原寸（muku 320px / Restaurant Tools 36px / for long life 27px）に合わせて
+       emで持たせているので、親の font-size を変えれば全体が同じ形のまま伸縮する */
+    .muku__mark{
+      font-size:clamp(56px, 13vw, 104px);
+      margin:0 0 var(--s4);
+      font-family:"Helvetica Neue", Arial, sans-serif;
+      font-weight:400;
+    }
+    .muku__mark span{ display:block; line-height:1; }
+    .muku__wm{ font-size:1em;    font-weight:500; color:#2E6E4E; letter-spacing:.04em; }
+    .muku__l1{ font-size:.1125em; color:#243249; letter-spacing:.22em; margin-top:2.5em; }
+    .muku__l2{ font-size:.084em;  color:#6b7280; letter-spacing:.30em; margin-top:1.2em; }
+    .muku__body p{ margin:0 0 var(--s3); }
+    .muku__body p:last-child{ margin-bottom:0; }
+    .muku__rule{ border:0; border-top:1px solid var(--hair); margin:var(--s5) 0 var(--s4); }
+    .muku__sub{ font-size:var(--fs-lead); line-height:var(--lh-lead); margin:0 0 var(--s3); }
+    .muku__note{ font-size:var(--fs-small); color:var(--ink-soft); line-height:1.9; }
+    .muku__form{ margin:var(--s4) 0 var(--s3); max-width:24rem; }
+    .muku__link,
+    .muku__back{
+      display:inline-block;
+      font-size:var(--fs-small);
+      color:var(--ink-soft);
+      text-decoration:none;
+      border-bottom:1px solid var(--hair);
+      padding-bottom:.12em;
+    }
+    .muku__back{ margin-top:var(--s4); }
+    .muku__link:hover,
+    .muku__back:hover{ color:var(--ink); border-bottom-color:var(--ink-soft); }
+  </style>
+  </style>
+</head>
+<body>
+
+  <a class="logo" href="../../" style="text-decoration:none;">mssbworks</a>
+
+  <main>
+    <!-- ムクを買った方のページ（2026-10-13 渡部 A）。
+         Brain の有料部分とムクの手順書がここ（旧 /muku/#help）へ人を送る。
+         Brainのガイドライン10・12（同じ商品を買える別の場所／販売目的のサイトへの案内はNG）に
+         当たらないように、**このページには販売ページへのリンクも、/muku/ へ戻るリンクも置かない**。
+         戻り先はトップだけ -->
+    <section class="muku" aria-label="ムクを買った方へ">
+      <div class="wrap">
+        <p class="label">Tools</p>
+        <h1 class="muku__title">ムクを買った方へ</h1>
+
+        <!-- ムクの窓口。ムクが「検算が合いませんでした」と出すときの送り先もここ。
+             送り先はトップの問い合わせと同じ（Web3Forms＋うちのWorker）で、
+             source で見分ける。**窓口を2つにしない**——記録が2箇所に散ると片方が腐る -->
+        <p class="muku__sub" id="help">うまくいかないとき</p>
+
+        <div class="muku__body">
+          <p>数字が合わない。動かない。データが読み込めない。ムクが「検算が合いませんでした」と言ったときも、ここから送ってください。</p>
+          <p><strong>どこが原因かは、こちらで調べます。</strong>レジの設定のこともあれば、ムクの読み取り側のこともあります。切り分けはこちらでやるので、気づいた時点でそのまま送ってください。</p>
+        </div>
+
+        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form muku__form" data-source="muku-help">
+          <input type="hidden" name="access_key" value="c66047d3-dc98-4911-8b6a-f69b80456201">
+          <input type="hidden" name="subject" value="ムク・うまくいかないとき">
+          <input type="hidden" name="from_name" value="ムク 窓口">
+          <input type="hidden" name="source" value="muku-help">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true">
+          <div class="contact-fields">
+            <div class="field">
+              <label for="hf-name">お店の名前</label>
+              <input id="hf-name" name="name" type="text" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label for="hf-email">メールアドレス</label>
+              <input id="hf-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            </div>
+            <div class="field">
+              <label for="hf-message">困っていること</label>
+              <textarea id="hf-message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="contact-submit">送信する</button>
+          </div>
+          <p class="contact-done" hidden>送信しました。こちらで確かめて、直せるものは直してご連絡します。</p>
+          <p class="contact-error" hidden>送信できませんでした。時間をおいて、もう一度お試しください。</p>
+        </form>
+
+        <p class="muku__note">使っているレジの名前と、どの月のことかを書いていただけると早いです。ムクが出した文をそのまま貼っていただくのが一番確かです。</p>
+
+        <hr class="muku__rule">
+
+        <p class="muku__sub">改修のお知らせ</p>
+
+        <div class="muku__body">
+          <p>ムクは今後も改修を重ねていきます。対応するレジを増やしたり、読みの精度を上げたり。</p>
+          <p>大きな改修があったとき、買っていただいた方にメールでお知らせします。それ以外は送りません。</p>
+        </div>
+
+        <!-- 送信は Web3Forms ＋ AJAX で同ページ完結（トップの問い合わせフォームと同じ鍵・件名だけ分けている） -->
+        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form muku__form">
+          <input type="hidden" name="access_key" value="c66047d3-dc98-4911-8b6a-f69b80456201">
+          <input type="hidden" name="subject" value="ムク・改修のお知らせ登録">
+          <input type="hidden" name="from_name" value="ムク 改修のお知らせ">
+          <input type="hidden" name="source" value="muku-update">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true">
+          <div class="contact-fields">
+            <div class="field">
+              <label for="mf-email">メールアドレス</label>
+              <input id="mf-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            </div>
+            <button type="submit" class="contact-submit">登録する</button>
+          </div>
+          <p class="contact-done" hidden>登録しました。大きな改修があったときに、このアドレスへお知らせします。</p>
+          <p class="contact-error" hidden>登録できませんでした。時間をおいて、もう一度お試しください。</p>
+        </form>
+
+        <p class="muku__note">いただいたアドレスは、このお知らせ以外には使いません。やめたいときは、届いたメールにそのまま返信してください。</p>
+
+        <a class="muku__back" href="../../">mssbworks について</a>
+      </div>
+    </section>
+    <div class="wrap">
+      <p class="muku__sub" style="margin-top:2rem"><a class="muku__link" href="/privacy/">お預かりしているものについて</a></p>
+    </div>
+</main>
+
+  <script>
+    (function(){
+      // このページにはフォームが2つある（改修のお知らせの登録／うまくいかないとき）。
+      // どちらも同じ扱いにする。**querySelector（1つ目だけ）にしない**——
+      // 足したフォームが黙って動かない、という形の事故になる
+      var forms = Array.prototype.slice.call(document.querySelectorAll('.muku__form'));
+      if(!forms.length) return;
+
+      // うちのWorkerにも同じ内容を送る（並走）。預け先をWeb3Formsからうちへ移すための準備。
+      // **画面の成否はWeb3Forms側だけで決める。**Workerが落ちても送れなくなってはいけないので、
+      // こちらの失敗は握りつぶしてコンソールに出す。
+      // お知らせの登録は /api/signup、窓口は /api/contact と、受け口が違う
+      var BASE = 'https://muku-mcp.muku-mcp.workers.dev';
+
+      function alsoSend(form, fd){
+        var src = form.getAttribute('data-source') || fd.get('source') || '';
+        var path = (src === 'muku-help') ? '/api/contact' : '/api/signup';
+        var body = {};
+        fd.forEach(function(v, k){ body[k] = String(v); });
+        if(path === '/api/signup' && !body.note){ body.note = body.message || ''; }
+        fetch(BASE + path, {
+          method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)
+        }).then(function(r){
+          if(!r.ok){ console.warn('控えの送信が失敗しました', path, r.status); }
+        }).catch(function(err){ console.warn('控えの送信が失敗しました', path, err); });
+      }
+
+      forms.forEach(function(form){
+        var fields = form.querySelector('.contact-fields');
+        var done   = form.querySelector('.contact-done');
+        var errMsg = form.querySelector('.contact-error');
+
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          errMsg.hidden = true;
+          var fd = new FormData(form);
+          alsoSend(form, fd);
+          fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Accept':'application/json'}, body: fd })
+            .then(function(r){ return r.json(); })
+            .then(function(json){
+              if(json.success){ fields.hidden = true; done.hidden = false; }
+              else { errMsg.hidden = false; }
+            })
+            .catch(function(){ errMsg.hidden = false; });
+        });
+      });
+
+      // #help で来たら、その位置まで一息で連れていく。
+      // ムクが出す送り先がここなので、着いたのに何も無い状態を作らない
+      function goHelp(){
+        if(location.hash !== '#help') return;
+        var el = document.getElementById('help');
+        if(el){ el.scrollIntoView({ block:'start' }); }
+      }
+      window.addEventListener('hashchange', goHelp);
+      window.addEventListener('load', goHelp);
+      goHelp();
+    })();
+  </script>
+
+  <!-- CF_BEACON -->
+</body>
+</html>

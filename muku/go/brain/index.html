@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <!-- 押された数を数えるための転送ページ（2026-10-13）。
+       ムクのページの「Brain」はここを通る。このページの閲覧数（Cloudflare Web Analytics）が、
+       Brain の販売ページへ押された数になる。Workerを使わないのは、配る版と混ざらないようにするため。
+       計測が先に送られるように、読み込みが終わってから少し待って移す。
+       販売ページのURLが変わったら、ここの2か所（meta と script）を替える -->
+  <meta http-equiv="refresh" content="3;url=https://brain-market.com/u/mssbworks/a/bxMDO3YjMgoTZsNWa0JXY">
+  <title>Brain の販売ページへ — mssbworks</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../img/favicon-32.png?v=12">
+  <link rel="stylesheet" href="../../../style.css">
+</head>
+<body>
+  <main>
+    <div class="wrap" style="padding-block:var(--s5)">
+      <p>Brain の販売ページへ移動しています。移らないときは<a href="https://brain-market.com/u/mssbworks/a/bxMDO3YjMgoTZsNWa0JXY">こちら</a>を押してください。</p>
+    </div>
+  </main>
+  <script>
+    window.addEventListener('load', function(){
+      setTimeout(function(){ location.replace('https://brain-market.com/u/mssbworks/a/bxMDO3YjMgoTZsNWa0JXY'); }, 400);
+    });
+  </script>
+  <!-- CF_BEACON -->
+</body>
+</html>
